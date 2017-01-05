@@ -21,13 +21,18 @@ headers = {'User-Agent': user_agent}
 try:
 	request = urllib2.Request(url, headers=headers)
 	response = urllib2.urlopen(request)
-	print response.read()
+	content = response.read().decode('utf-8')
+	pattern = re.compile(
+			'<div.*?author clearfix">.*?<h2>(.*?)</h2>.*?<div.*?content".*?<span>(.*?)</span>.*?</a>(.*?)<div class="stats".*?number">(.*?)</i>',
+			re.S)
+	items = re.findall(pattern, content)
+	for item in items:
+		haveImg = re.search('img', item[2])
+		if not haveImg:
+			print '\n', 'User:', item[0], '\n', 'Content:', item[1], '\n', 'Likes:', item[3]
+
 except urllib2.URLError, e:
 	if hasattr(e, 'code'):
 		print e.code
 	if hasattr(e, 'reason'):
 		print e.reason
-
-content = response.read().decode('utf-8')
-pattern = re.compile(
-		'<div.*?author">.*?<img.*?>(.*?)</a>.*?<div.*?>' + 'content">(.*?)<!--(.*?)-->.*?</div>(.*?)<div class="stats.*?class="number">(.*?)</i>')
