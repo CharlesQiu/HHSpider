@@ -59,15 +59,17 @@ print "m.span(2):", m.span(2)
 print r"m.expand(r'\g \g\g'):", m.expand(r'\2 \1\3')
 
 pattern_split = re.compile(r'\d+')
-print re.split(pattern_split,'one1two2three3four4')
+print re.split(pattern_split, 'one1two2three3four4')
 print re.findall(pattern_split, 'one1two2three3four4')
-for m in re.finditer(pattern_split,'one1two2three3four4'):
+for m in re.finditer(pattern_split, 'one1two2three3four4'):
     print m.group(),
 
 pattern_subn = re.compile(r'(\w+) (\w+)')
 print pattern_subn.subn(r'\2 \1', 'i say, hello world!')
 
+
 def fun(m):
     return m.group(1).title() + ' ' + m.group(2).title()
+
 
 print pattern_subn.subn(fun, 'i say, hello world!')
