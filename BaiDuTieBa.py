@@ -176,7 +176,7 @@ class BDTB:
 
 
 if __name__ == '__main__':
-    baseUrl = "http://tieba.baidu.com/p/4778121713"  # 3138733512
+    baseUrl = "http://tieba.baidu.com/p/4922944998" # 4778121713(nba)   3138733512(nba)
     seeLZ = raw_input('是否只获取楼主发言，是输入1，否输入0:')
     bdtb = BDTB(baseUrl, seeLZ)
     bdtb.start()
